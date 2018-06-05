@@ -1,0 +1,9 @@
+{
+    "name": "pixney/avviare-extension",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Pixney\\AvviareExtension\\": "src/"
+        }
+    }
+}
