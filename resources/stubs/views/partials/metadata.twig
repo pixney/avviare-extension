@@ -31,14 +31,7 @@
 <!-- Favicon -->
 {#{{ favicons("theme::img/favicon.png") }}#}
 
-{# Base Theme Components #}
-{{ asset_add("theme.css", "theme::dist/css/theme.css") }}
-
-
-{# Include Asset Collections #}
-<style type="text/css">
-    {{ asset_inline("theme.css") }}
-</style>
+ <link rel="stylesheet" href="{{ mix('/css/theme.css') }}">
 
 {{ template.includes.render('head')|raw }}
 
