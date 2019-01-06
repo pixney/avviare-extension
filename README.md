@@ -1,17 +1,34 @@
 # Installation
-Add the following to your composer.json file: `"pixney/avviare-extension":"~0.2.0"` then run composer update. Once it is done, you probably need to run `composer dump`.
 
-## Install
-`php artisan addon:install avviare`
+## Install PyroCMS
+First of all, you need to make sure you install PyroCMS. Follow the instructions on its hompage or [see how i prefer doing it on this page.](https://williamastrom.se/blog/pyrocms-vue-laravel-and-bootstrap-4-get-started-quickly)
 
-## Scaffold your theme
-Do this how you normally do with PyroCMS. Example: `php artisan make:addon mycompany.theme.themename` 
 
-## Set yourself up for using laravel mix
-When your theme is scaffolded, it's finally time to have Avviare delete directories we don't need and set you up for using laravel mix: `php artisan setup:theme mycompany.theme.themename`
+## Install Avviare
+Add the following to your composer.json file: `"pixney/avviare-extension":"~0.2.0"` then run the install commands below:
 
-## Final step
-`npm install`
+```
+composer dump
+php artisan addon:install avviare
+``` 
 
-### oh....
-Don't forget that once you are done, go to settings->display and make sure you select your new theme as the public one. You gotta run `php artisan streams:compile` afterwards.
+
+
+## Create a theme
+**themename** is the name of your theme:
+
+```
+php artisan make:addon mycompany.theme.themename
+``` 
+
+## Setup everything for mix
+
+When your theme is scaffolded, Avviare will delete directories not required and set you up for using laravel mix. It's important that you run **npm install** after setting up the theme since otherwise the old version prior to mix 4 will be used.
+
+```
+php artisan setup:theme mycompany.theme.themename
+npm install
+```
+
+## And...
+Don't forget to visit `settings->display` and make sure you select your new theme as the public one.

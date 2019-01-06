@@ -142,6 +142,6 @@ class Avviare extends Command
 
         // $this->info('Views copied');
 
-        $this->comment('Rock on!');
+        $this->comment("That's it, you are ready to start developing!");
     }
 }
