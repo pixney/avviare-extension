@@ -28,7 +28,11 @@ When your theme is scaffolded, Avviare will delete directories not required and 
 ```
 php artisan setup:theme mycompany.theme.themename
 npm install
+npm run watch or npm run prod
 ```
 
-## And...
+## Important 1
 Don't forget to visit `settings->display` and make sure you select your new theme as the public one.
+
+## Important 2
+Because of some changes in the metadata.twig file, you need to either remove the lines for the favicon and open graph image or add those images. If you don't - then you will experience some issues trying to view your site.
