@@ -5,31 +5,24 @@ First of all, you need to make sure you install PyroCMS. Follow the instructions
 
 
 ## Install Avviare
-Add the following to your composer.json file: `"pixney/avviare-extension":"~0.2.0"` then run the install commands below:
 
 ```
+composer require "pixney/avviare-extension"
 composer dump
 php artisan addon:install avviare
 ``` 
 
 
 
-## Create a theme
-**themename** is the name of your theme:
+## Get started
 
+This is how you create your theme:
 ```
-php artisan make:addon mycompany.theme.themename
+php artisan theme:setup mycompany.theme.themename
 ``` 
 
-## Setup everything for mix
-
-When your theme is scaffolded, Avviare will delete directories not required and set you up for using laravel mix. It's important that you run **npm install** after setting up the theme since otherwise the old version prior to mix 4 will be used.
-
-```
-php artisan setup:theme mycompany.theme.themename
-npm install
-npm run watch or npm run prod
-```
+### After install
+When everything is completed, your theme is ready to be used. Unless you already have, you need to run `npm install` and after completion you can run the regular `npm run watch/prod` commands.
 
 ## Important 1
 Don't forget to visit `settings->display` and make sure you select your new theme as the public one.

@@ -4,6 +4,7 @@ namespace Pixney\AvviareExtension\Command;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Pixney\AvviareExtension\AvviareExtension;
 use Anomaly\Streams\Platform\Application\Application;
@@ -27,7 +28,7 @@ class Avviare extends Command
      */
     protected $description    = 'Command description';
     protected $packageJsonUrl = 'https://raw.githubusercontent.com/laravel/laravel/master/package.json';
-
+    protected $namespace      = '';
     /**
      * Undocumented variable
      *
@@ -69,17 +70,21 @@ class Avviare extends Command
      */
     public function handle(Filesystem $filesystem, Application $application, AvviareExtension $ext)
     {
-        $namespace            = $this->argument('theme');
+        $this->namespace            = $this->argument('theme');
 
-        if (preg_match('#^[a-zA-Z0-9_]+\.[a-zA-Z_]+\.[a-zA-Z0-9_]+\z#u', $namespace) !== 1) {
-            throw new \Exception('The namespace should be snake case and formatted like: {vendor}.{type}.{slug}');
+        if (preg_match(' #^[a-zA-Z0-9_]+\.[a-zA-Z_]+\.[a-zA-Z0-9_]+\z#u', $this->namespace) !== 1) {
+            throw new \Exception('The namespace should be snake case and formatted this way: {vendor}.{type}.{slug}');
         }
+
+        Artisan::call('make:addon', [
+            'namespace' => $this->namespace
+        ]);
 
         list($vendor, $type, $slug) = array_map(
             function ($value) {
                 return str_slug(strtolower($value), '_');
             },
-            explode('.', $namespace)
+            explode('.', $this->namespace)
         );
 
         $type = str_singular($type);
@@ -89,35 +94,33 @@ class Avviare extends Command
         $resourcesPath        = $path . '/resources/';
         $distPath             = $resourcesPath . 'dist/';
 
-        if ($this->confirm('Would you like to delete the following directories and replace them with new ones? : ' . implode(',', $this->deleteDirs))) {
-            foreach ($this->deleteDirs as $dir) {
-                $filesystem->deleteDirectory($resourcesPath . $dir);
-                $this->info('Deleted: ' . $resourcesPath . $dir);
-            }
-            foreach ($this->createDirs as $dir) {
-                $filesystem->makeDirectory($resourcesPath . $dir);
-                $this->info('Created: ' . $resourcesPath . $dir);
-            }
-            // Copy JS files
-            $filesystem->copyDirectory(
+        foreach ($this->deleteDirs as $dir) {
+            $filesystem->deleteDirectory($resourcesPath . $dir);
+            $this->info('Deleted: ' . $resourcesPath . $dir);
+        }
+        foreach ($this->createDirs as $dir) {
+            $filesystem->makeDirectory($resourcesPath . $dir);
+            $this->info('Created: ' . $resourcesPath . $dir);
+        }
+        // Copy JS files
+        $filesystem->copyDirectory(
             $avviarePath . '/resources/stubs/js',
             "{$path}/resources/js"
         );
-            $this->info('Javascript files copied');
+        $this->info('Javascript files copied');
 
-            // Copy SCSS files
-            $filesystem->copyDirectory(
+        // Copy SCSS files
+        $filesystem->copyDirectory(
             $avviarePath . '/resources/stubs/sass',
             "{$path}/resources/sass"
         );
-            $this->info('Sass files copied');
+        $this->info('Sass files copied');
 
-            // Copy VIEWS files
-            $filesystem->copyDirectory(
+        // Copy VIEWS files
+        $filesystem->copyDirectory(
             $avviarePath . '/resources/stubs/views',
             "{$path}/resources/views"
         );
-        }
 
         if ($this->confirm('Would you like us to automatically set your webpack.mix.js file?')) {
             // Get webpack.mix.js stub
@@ -131,7 +134,7 @@ class Avviare extends Command
             $filesystem->put(base_path('webpack.mix.js'), $webpack);
         }
 
-        if ($this->confirm('Would you like to replace the existing package.json file?')) {
+        if ($this->confirm('Would you like to replace the existing package.json file with the current one used by laravel?')) {
             // Delete webpack
             $filesystem->delete(base_path('package.json'));
             // Copy webpack
