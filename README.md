@@ -18,7 +18,7 @@ php artisan addon:install avviare
 
 This is how you create your theme:
 ```
-php artisan theme:setup mycompany.theme.themename
+php artisan setup:theme mycompany.theme.themename
 ``` 
 
 ### After install
