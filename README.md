@@ -79,7 +79,12 @@ Within the webpack.mix.js file, set the proxy and files to watch for:
 
 
 ### Offside JS
+Using an off-canvas navigation called offside.
 
+### Styling
+Simple styling, just remove it and make your own..
+
+![Image showing how matomo dashboard widget for Pyro Cms looks](https://github.com/pixney/matomo_widget-extension/blob/master/matomo_widget-extension.png)
 
 ## After install
 
