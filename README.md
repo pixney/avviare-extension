@@ -18,6 +18,18 @@ php artisan install
 
 ### Install Avviare
 
+Within your composer.json file, add :
+```
+{
+  "repositories": [{
+    "type": "composer",
+    "url": "https://packages.pixney.com"
+  }]
+}
+```
+
+Then simply require it : 
+
 ```
 composer require "pixney/avviare-extension"
 composer dump
