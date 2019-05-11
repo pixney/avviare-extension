@@ -43,11 +43,9 @@ php artisan make:theme mycompany.theme.themename
 ``` 
 
 
-### SVG Spitemaps
-If you use svgs, it's a recommended to create a svg sprite. Install this package and then place your svg's within `resources/svgs`. When you run `npm run watch/production` this plugin will create the svg sprite map for you.
-```
-npm install svg-spritemap-webpack-plugin
-```
+### SVG Spitemaps (svg-spritemap-webpack-plugin)
+If you use svgs, it's a recommended to create a svg sprite. After you have run npm install you simply place your svgs in `resources/svgs` and when you run `npm run watch/production` this plugin will create the svg sprite map for you.
+
 
 #### Using an svg within twig files
 Include the spritemap in your view:
@@ -78,6 +76,9 @@ Within the webpack.mix.js file, set the proxy and files to watch for:
 
 
 **If you don't want to use svg sprite plugin or browsersync, simply comment out or remove the reference within webpack.mix.js**
+
+
+### Offside JS
 
 
 ## After install

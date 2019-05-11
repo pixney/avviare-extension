@@ -27,7 +27,12 @@ class Avviare extends Command
      * @var string
      */
     protected $description    = 'Create a new pyrocms theme';
-    protected $packageJsonUrl = 'https://raw.githubusercontent.com/laravel/laravel/master/package.json';
+
+    /**
+     * Undocumented variable
+     *
+     * @var string
+     */
     protected $namespace      = '';
     /**
      * Undocumented variable
@@ -55,8 +60,8 @@ class Avviare extends Command
     ];
 
     protected $deleteFiles = [
-        'webpack.mix.js',
-        'package.json'
+        '/webpack.mix.js',
+        '/package.json'
     ];
 
     /**
@@ -93,20 +98,24 @@ class Avviare extends Command
         $type                 = str_singular($type);
         $avviarePath          = $ext->path;
         $resourcesPath        = $path . '/resources/';
-        $distPath             = $resourcesPath . 'dist/';
 
         Artisan::call('make:addon', [
             'namespace' => $this->namespace
         ]);
 
+        // Delete directories
         foreach ($this->deleteDirs as $dir) {
             $filesystem->deleteDirectory($resourcesPath . $dir);
             $this->info('Deleted: ' . $resourcesPath . $dir);
         }
+
+        // Delete Files
         foreach ($this->deleteFiles as $file) {
-            $filesystem->delete($path . '/' . $file);
-            $this->info('Deleted: ' . $path . '/' . $file);
+            $filesystem->delete($path . $file);
+            $this->info('Deleted: ' . $path . $file);
         }
+
+        // Create new directories
         foreach ($this->createDirs as $dir) {
             $filesystem->makeDirectory($resourcesPath . $dir);
             $this->info('Created: ' . $resourcesPath . $dir);
@@ -144,6 +153,10 @@ class Avviare extends Command
             "{$path}/resources/images"
         );
 
+        // Copy package.json
+        $packagejson    = $filesystem->get($avviarePath . '/resources/stubs/package.json');
+        $filesystem->put(base_path('package.json'), $packagejson);
+
         if ($this->confirm('Would you like us to automatically set your webpack.mix.js file?')) {
             $jsPath                    = '.' . str_replace(base_path(), '', $path) . '/resources/js/app.js';
             $cssPath                   = '.' . str_replace(base_path(), '', $path) . '/resources/sass/theme.scss';
@@ -158,20 +171,19 @@ class Avviare extends Command
             $webpack    = str_replace('DummyAppCSS', $cssPath, $webpack);
             $webpack    = str_replace('DummySvgSpriteDestination', $DummySvgSpriteDestination, $webpack);
             $webpack    = str_replace('DummySvgSourcePath', $DummySvgSourcePath, $webpack);
-            //
-            // /Users/williamastrom/Sites/pyrotheme
+
             $filesystem->put(base_path('webpack.mix.js'), $webpack);
         }
 
-        if ($this->confirm('Would you like to replace the existing package.json file with the current one used by laravel?')) {
-            // Delete webpack
-            $filesystem->delete(base_path('package.json'));
-            // Copy webpack
-            //$filesystem->copy($avviarePath . '/resources/stubs/package.json', base_path('package.json'));
-            $file = file_get_contents($this->packageJsonUrl);
-            $filesystem->put(base_path('package.json'), $file);
-        }
+        // if ($this->confirm('Would you like to replace the existing package.json file with the current one used by laravel?')) {
+        //     // Delete webpack
+        //     $filesystem->delete(base_path('package.json'));
+        //     // Copy webpack
+        //     //$filesystem->copy($avviarePath . '/resources/stubs/package.json', base_path('package.json'));
+        //     $file = file_get_contents($this->packageJsonUrl);
+        //     $filesystem->put(base_path('package.json'), $file);
+        // }
 
-        $this->comment("That's it, you are ready to start developing!");
+        $this->comment('You need to run npm install and then you are ready to start development!');
     }
 }
