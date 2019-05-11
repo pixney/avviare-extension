@@ -84,7 +84,7 @@ Using an off-canvas navigation called offside.
 ### Styling
 Simple styling, just remove it and make your own..
 
-![Image showing how matomo dashboard widget for Pyro Cms looks](https://github.com/pixney/matomo_widget-extension/blob/master/matomo_widget-extension.png)
+![Image is showing the theme styling](https://github.com/pixney/avviare-extension/blob/master/resources/stubs/images/theme.png)
 
 ## After install
 
