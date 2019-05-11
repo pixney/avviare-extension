@@ -18,23 +18,38 @@
 
 <body>
 
-{% include "theme::partials/header" %}
-
-<main id="main">
-    <div class="container">
-
+    <div id="app">
         {% include "theme::partials/messages" %}
+        {% include "theme::partials/navigation" %}
 
-        {% block content %}{% endblock %}
 
-        <svg><use xlink:href="#example" /></svg>
+        <main id="my-content-container">
+            {% include "theme::partials/header" %}
+            {% include "theme::partials/breadcrumbs" %}
+            
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+            
+            {#% if (request_path() == '/') %}
+            {% include "theme::partials/posts" %}
+            {% endif %#}
+
+            {% include "theme::partials/footer" %}
+
+        </main>
 
     </div>
-</main>
 
-{% include "theme::partials/footer" %}
-{% include "theme::partials/assets" %}
+
+    {% include "theme::partials/assets" %}
 
 </body>
+
 </html>
 {% endhtmlcompress %}
