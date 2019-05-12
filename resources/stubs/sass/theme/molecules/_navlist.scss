@@ -4,13 +4,31 @@
     padding: 0;
 
     list-style-type: none;
-    &__item,li
+    &__item,
+    li
     {
         text-align: center;
     }
 
-    &.-horizontal 
+    &.-horizontal
     {
-        display:flex;
+        display: flex;
+
+        li
+        {
+            margin-left: .8rem;
+        }
+    }
+    &.-desktop
+    {
+        display: none;
+        &.-horizontal
+        {
+            line-height: 40px;
+        }
+        @media (min-width: 1024px)
+        {
+            display: flex;
+        }
     }
 }
