@@ -7,9 +7,18 @@
     border: 0;
     background: transparent;
 
+    @media (min-width: 1024px) {
+        display:none;
+    }
+
     &__svg
     {
         width: 100%;
         height: 100%;
+    }
+
+    body.offside-js--is-open & 
+    {
+        
     }
 }

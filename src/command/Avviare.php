@@ -19,7 +19,7 @@ class Avviare extends Command
      *
      * @var string
      */
-    protected $signature = 'make:theme {theme} {--shared=}';
+    protected $signature = 'avviare:create {theme} {--shared=}';
 
     /**
      * The console command description.

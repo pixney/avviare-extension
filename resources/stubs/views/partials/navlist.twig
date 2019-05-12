@@ -1,0 +1,20 @@
+<ul class="m-navlist -horizontal">
+    <li>
+        <a href="{{ url_to("/") }}">Home</a>
+    </li>
+    <li>
+        <a href="{{ url_route('anomaly.module.posts::posts.index') }}">Posts</a>
+    </li>
+    <li>
+        <a href="{{ url_to("contact") }}">Contact</a>
+    </li>
+    {% if auth_check() %}
+    <li>
+        <a href="{{ url_route('anomaly.module.users::logout') }}" class="">Logout</a>
+    </li>
+    {% else %}
+    <li>
+        <a href="{{ url_route('anomaly.module.users::login') }}?redirect={{ request_url() }}" class="">Login</a>
+    </li>
+    {% endif %}
+</ul>

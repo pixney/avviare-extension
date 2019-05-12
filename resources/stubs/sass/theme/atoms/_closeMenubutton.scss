@@ -1,15 +1,19 @@
 .a-closeMenubutton
 {
+    position: absolute;
+    right: 0;
+
     display: flex;
 
-    justify-content: flex-start;
-    padding:.5rem 0 1rem;
+    padding: 1rem;
 
-    
+    justify-content: flex-end;
+
+
     &__button
     {
-        width: 15px;
-        height: 15px;
+        width: 25px;
+        height: 25px;
         padding: 0;
 
         border: 0;
