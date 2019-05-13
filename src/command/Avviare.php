@@ -153,6 +153,12 @@ class Avviare extends Command
             "{$path}/resources/images"
         );
 
+        // Copy Command files
+        $filesystem->copyDirectory(
+            $avviarePath . '/resources/stubs/Command',
+            "{$path}/src/Command"
+        );
+
         // Copy package.json
         $packagejson    = $filesystem->get($avviarePath . '/resources/stubs/package.json');
         $filesystem->put(base_path('package.json'), $packagejson);
