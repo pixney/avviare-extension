@@ -37,7 +37,8 @@ php artisan addon:install avviare
 ``` 
 
 ### Create a theme
-Behind the scenes, this will run pyrocms artisan command for scaffolding a theme, then simply remove and replace files to make sure it works the way we want.
+Running this command, we will be scaffolding the default theme supplied by Pyrocms, and then remove and replace
+files to make sure we have a barebone theme setup the way we like it.
 ```
 php artisan avviare:create mycompany.theme.themename
 ``` 
