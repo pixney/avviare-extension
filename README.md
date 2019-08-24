@@ -18,6 +18,9 @@ php artisan install
 
 ### Install Avviare
 
+Make sure you have installed your npm dependencies by running :
+`npm run install`
+
 Within your composer.json file, add :
 ```
 {
