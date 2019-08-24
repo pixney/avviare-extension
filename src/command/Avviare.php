@@ -190,6 +190,6 @@ class Avviare extends Command
         //     $filesystem->put(base_path('package.json'), $file);
         // }
 
-        $this->comment('You need to run npm install and then you are ready to start development!');
+        //$this->comment('You need to run npm install and then you are ready to start development!');
     }
 }
