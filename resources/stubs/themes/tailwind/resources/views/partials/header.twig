@@ -1,0 +1,15 @@
+<div class="container mx-auto h-10">
+    <div class="flex flex-row h-10">
+        <div class="w-1/4">
+            <a href="/">
+                <svg class="h-10">
+                    <use xlink:href="#logo" />
+                </svg>
+                Pixney
+            </a>
+        </div>
+        <div class="w-full">
+            {% include "theme::partials/navlist" with {'class':'-desktop'}%}
+        </div>
+    </div>
+</div>

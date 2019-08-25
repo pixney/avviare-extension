@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "theme::partials/metadata" %}
+</head>
+
+<body>
+
+    <div id="app">
+        {% include "theme::partials/messages" %}
+        {% include "theme::partials/header" %}
+        {% include "theme::partials/breadcrumbs" %}
+        <div class="container mx-auto">
+            <div class="flex flex-wrap">
+                <div class="w-full">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        {% include "theme::partials/footer" %}
+    </div>
+
+    {# <script src="{{mix('js/app.js')}}"></script> #}
+</body>
+
+</html>

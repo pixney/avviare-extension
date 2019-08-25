@@ -1,0 +1,29 @@
+{% htmlcompress %}
+<!doctype html>
+<html>
+
+<head>
+    {% include "theme::partials/metadata" %}
+</head>
+
+<body>
+    <div id="app">
+        {% include "theme::partials/messages" %}
+        <main ref="content">
+            {% include "theme::partials/header" %}
+            {% include "theme::partials/breadcrumbs" %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+            {% include "theme::partials/footer" %}
+        </main>
+    </div>
+    {% include "theme::partials/assets" %}
+</body>
+
+</html>
+{% endhtmlcompress %}
